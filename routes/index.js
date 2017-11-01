@@ -12,7 +12,7 @@ router.get('/gettvshow', function(req, res, next) {
 
 	var result = [];
 
-	https.get('http://api.tvmaze.com/singlesearch/'+ req.query.q, function(response) {
+	http.get('http://api.tvmaze.com/singlesearch/'+ req.query.q, function(response) {
 		response.on('data', function(d) {
 			result += d;
 		});
