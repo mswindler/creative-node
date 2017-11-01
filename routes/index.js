@@ -1,4 +1,6 @@
 var express = require('express');
+var NetflixRoulette = require('netflix-roulette');
+var unirest = require('unirest');
 const fs = require('fs');
 const https = require('https');
 var router = express.Router();
