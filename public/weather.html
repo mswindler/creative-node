@@ -18,13 +18,15 @@
         dataType : "json",
         success : function(parsed_json) {
           var everything = "";
-            var type = parsed_json[0]['type'];
-            var definition = parsed_json[0]['defenition'];
-            var example = parsed_json[0]['example'];
-            everything += "<div><h3>" + value + "</h3>";
-            everything += "<p>Definition: " + definition + "</p>";
+            var name = parsed_json[0]['name'];
+            var summary = parsed_json[0]['summary'];
+            var image = parsed_json[0]['image']['medium'];
+            var officialSite = parsed_json[0]['officialSite'];
+            everything += "<div><h3>" + name + "</h3>";
+            everything += "<p>Summary: " + summary + "</p>";
+            everything += "<p>" + image + "</p>";
           if (example != null) {
-            everything += "<p>Example: " + example + "</p></div>";
+            everything += "<p>Website: " + officialSite + "</p></div>";
           }
             $("#searchResults").html(everything);
         }
