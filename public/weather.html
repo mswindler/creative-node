@@ -18,10 +18,10 @@
         dataType : "json",
         success : function(parsed_json) {
           var everything = "";
-            var name = parsed_json[0]['name'];
-            var summary = parsed_json[0]['summary'];
-            var image = parsed_json[0]['image']['medium'];
-            var officialSite = parsed_json[0]['officialSite'];
+            var name = parsed_json['name'];
+            var summary = parsed_json['summary'];
+            var image = parsed_json['image']['medium'];
+            var officialSite = parsed_json['officialSite'];
             everything += "<div><h3>" + name + "</h3>";
             everything += "<p>Summary: " + summary + "</p>";
             everything += "<p>" + image + "</p>";
