@@ -10,6 +10,13 @@ router.get('/', function(req, res, next) {
   res.sendFile('weather.html', {root: 'public'});
 });
 
+unirest.get("https://community-netflix-roulette.p.mashape.com/api.php?title=The+Boondocks&year=2005")
+.header("X-Mashape-Key", "BhK16cP7pNmshN8ZYAwwS112vY5zp1fuixnjsnGtB79nicV0pA")
+.header("Accept", "application/json")
+.end(function (result) {
+  console.log(result.status, result.headers, result.body);
+});
+
 router.get('/getcity', function(req, res, next) {
 	fs.readFile(__dirname + '/cities.dat.txt',function(err, data) {
 		if (err) throw err;
