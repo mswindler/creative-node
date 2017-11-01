@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>My Server</title>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function(){
+    $("#cityField").keyup(function(){
+      var url="/getcity?q="+$("#cityField").val();
+      $.getJSON(url,function(data){var everything;everything="<ul>";
+      $.each(data,function(i,item){everything+="<li> "+data[i].city;});everything+="</ul>";
+      $("#txtHint").html(everything);});
+      $("#txtHint").text("Keyup "+$("#cityField").val());});
+      
+     $("#weatherButton").click(function(e){
+  var value = $("#cityField").val();
+  e.preventDefault();
+    $("#displayCity").text(value);
+       
+      var myurl= "https://api.wunderground.com/api/cb0a6b925c41b818/geolookup/conditions/q/UT/";
+      myurl += value;
+      myurl += ".json";
+      console.log(myurl);
+      $.ajax({
+        url : myurl,
+        dataType : "json",
+        success : function(parsed_json) {
+      var location = parsed_json['location']['city'];
+      var temp_string = parsed_json['current_observation']['temperature_string'];
+      var current_weather = parsed_json['current_observation']['weather'];
+      everything = "<ul>";
+      everything += "<li>Location: "+location;
+      everything += "<li>Temperature: "+temp_string;
+      everything += "<li>Weather: "+current_weather;
+      everything += "</ul>";
+      $("#weather").html(everything);
+      }
+  });
+});                                
+ $("#searchButton").click(function(f){
+  var value = $("#searchWord").val();
+  f.preventDefault();
+    $("#searchResults").text(value);
+       
+      var myurl= "/getword?w=";
+      myurl += value;
+      console.log(myurl);
+      $.ajax({
+        url : myurl,
+        dataType : "json",
+        success : function(parsed_json) {
+          var everything = "";
+            var type = parsed_json[0]['type'];
+            var definition = parsed_json[0]['defenition'];
+            var example = parsed_json[0]['example'];
+            everything += "<div><h3>" + value + "</h3>";
+            everything += "<p>Definition: " + definition + "</p>";
+          if (example != null) {
+            everything += "<p>Example: " + example + "</p></div>";
+          }
+            $("#searchResults").html(everything);
+        }
+      });
+ });
+});
+  </script>
+  <style>
+    h1 {
+      padding:50px;
+      background: lightgray;
+      border-radius: 25px;
+    }
+    input#searchStack, input#cityField {
+      border-style: solid;
+    }
+    hr {
+      border-width: 2px;
+      border-style: solid;
+      border-color: cyan;
+    }
+    div#searchResults div:hover {
+      padding: 3px;
+      font-size: larger;
+    }
+    input#weatherButton:hover, input#searchButton:hover {
+      background-color: cyan;
+    }
+    input:active, input:focus {
+      background-color: cyan;
+    }
+    span#txtHint {
+      display: block;
+      height: 172px;
+      white-space: nowrap;
+      overflow: auto;
+      border-radius: 25px;
+      border: 3px solid #d3d3d3;
+      margin: 15px;
+    }
+    input {
+      border-radius: 5px;
+      border-width: 2px;
+      border-style:double;
+      border: #00e2ff;
+      padding: 5px;
+    }
+    h2 {
+      padding:30px;
+      background: #00e2ff;
+      border-radius: 25px;
+    }
+    body {
+      margin:auto;
+      text-align:center;
+      width:85%;
+      font-family:"Arial",sans-serif;
+      padding: 20px;
+    }
+    div#searchResults {
+      margin: auto;
+      width: 90%;
+    }
+    ul {
+      list-style-type: none;
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+      margin: 10px;
+      -webkit-padding-start: 0;
+    }
+    textarea#displayCity {
+      border-width: 0;
+      display:none;
+    }
+  </style>
+</head>
+<body>
+  <div id="content">
+  <h1>Welcome to my Server</h1>
+  <h2>Weather Finder</h2>
+<form>
+Enter A Utah City: <input type="text" placeholder="Saint George" id="cityField" value=""><br>
+Suggestion: <span id="txtHint">Start typing...</span>
+<input id="weatherButton" type="submit" value="Submit">
+</form>
+<textarea readonly="readonly" id="displayCity">No City</textarea>
+    <p><strong>Current Weather</strong></p>
+<div id="weather">No weather</div>
+  
+  <h2>Word Search</h2>
+  <form>
+Find a word in the dictionary: <input type="text" id="searchWord" placeholder="Owl..." value=""><br>
+<input id="searchButton" type="submit" value="Submit">
+</form>
+    <p><strong>Word Result</strong></p>
+  <div id="searchResults">No Results</div>
+  </div>
+</body>
+</html>
