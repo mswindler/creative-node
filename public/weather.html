@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>My Server</title>
+<title>TV Shows</title>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script>
   $(document).ready(function(){
@@ -8,7 +8,7 @@
  $("#searchButton").click(function(f){
   var value = $("#searchWord").val();
   f.preventDefault();
-    $("#searchResults").text(value);
+//     $("#searchResults").text(value);
        
       var myurl= "/gettvshow?q=";
       myurl += value;
@@ -40,7 +40,7 @@
       background: lightgray;
       border-radius: 25px;
     }
-    input#searchStack, input#cityField {
+    input#searchWord, input#cityField {
       border-style: solid;
     }
     hr {
@@ -48,7 +48,7 @@
       border-style: solid;
       border-color: cyan;
     }
-    div#searchResults div:hover {
+    div#searchResults div {
       padding: 3px;
       font-size: larger;
     }
@@ -108,11 +108,11 @@
   <h1>Welcome to my Server</h1>  
   <h2>TV Show Search</h2>
   <form>
-Find a TV show: <input type="text" id="searchWord" placeholder="Owl..." value=""><br>
+Find a TV show: <input type="text" id="searchWord" placeholder="The Last Airbender" value=""><br>
 <input id="searchButton" type="submit" value="Submit">
 </form>
     <p><strong>TV Show Results</strong></p>
-  <div id="searchResults">No Results</div>
+  <div id="searchResults"></div>
   </div>
 </body>
 </html>
