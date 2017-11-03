@@ -6,6 +6,10 @@
 <script>
   $(document).ready(function(){
                          
+        setTimeout(function(){
+          $('body').addClass('loaded');
+        }, 3000);
+
  $("#searchButton").click(function(f){
   var value = $("#searchWord").val();
   f.preventDefault();
@@ -36,6 +40,25 @@
 });
   </script>
   <style>
+    .loaded #page-loader {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 5.3s 2s;
+    }
+    #page-loader {
+      left: 0;
+      background: black;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      position: fixed;
+      opacity: 1;
+    }
+    div#loader {
+      margin: auto;
+      font-size: 100;
+      padding-top: 50px;
+    }
     h1 {
       padding:50px;
       background: rgba(0, 0, 0, 0.5);
@@ -55,14 +78,19 @@
       font-size: larger;
       background: rgba(0, 0, 0, 0.5);
       border-radius:25px;
-      box-shadow: 1px 1px 0px 0px #810505, 0 0 25px 4px #fef40f, 0 0 20px 7px #f53205;
+      box-shadow: 1px 1px 20px 2px #6e5445, 0 0 25px 4px #fff596, 0 0 5px #dca277;
     }
     input#weatherButton:hover, input#searchButton:hover {
       background-color: #8150ce;
     }
+    img {
+      box-shadow: 1px 1px 20px 2px #1b3745, 0 0 25px 4px #7ba1ac, 0 0 5px #3c646c;
+      margin: 25px;
+    }
     input:active, input:focus {
       background-color: #d4b4fd;
     }
+   
     span#txtHint {
       display: block;
       height: 172px;
@@ -84,7 +112,7 @@
       padding:30px;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 25px;
-      box-shadow: 1px 1px 20px 2px #6e5445, 0 0 25px 4px #fff596, 0 0 5px #dca277;
+      box-shadow: 1px 1px 0px 0px #810505, 0 0 25px 4px #fef40f, 0 0 20px 7px #f53205;
     }
     body {
       margin:auto;
@@ -119,6 +147,9 @@
   </style>
 </head>
 <body>
+    <div id="page-loader">
+        <div id="loader"><p>Let go of the world around you...</p></div>
+    </div>
   <div id="content">
   <h1>Find Information About TV Shows</h1>  
   <h2>TV Show Search</h2>
